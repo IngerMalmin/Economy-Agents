@@ -8,7 +8,10 @@ public class GoldGenerator : MonoBehaviour
 
     private int currentGold = 0;
     public int goldFromClick = 10;
-    public int goldFromSamwise = 150;
+    public int goldFromSamwise = 300;
+    public int goldFromPippin = 100;
+
+    public GameObject videoPlayer;
 
     [SerializeField] private TextMeshProUGUI score;
 
@@ -20,6 +23,12 @@ public class GoldGenerator : MonoBehaviour
 
     }
 
+    public void PippinClick()
+    {
+        currentGold += goldFromPippin;
+        score.text = currentGold.ToString();
+        
+    }
     public void SamwiseClick()
     {
         currentGold += goldFromSamwise;
@@ -74,6 +83,35 @@ public class GoldGenerator : MonoBehaviour
             yield return new WaitForSeconds(10f);
             SamwiseClick();
 
+        }
+    }
+
+    public void HornOfGondor(int cost)
+    {
+        if (currentGold >= cost)
+        {
+            Application.Quit();
+            
+        }
+    }
+
+    public void BuyPippin(int cost)
+    {
+        if (currentGold >= cost)
+        {
+            currentGold -= cost;
+            StartCoroutine(AutoClicker());
+            score.text = currentGold.ToString();
+            //uiManager.UpdateGold(currentGold);
+        }
+    }
+    private IEnumerator Pippin()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            //Click the cookie
+            PippinClick();
         }
     }
 }
