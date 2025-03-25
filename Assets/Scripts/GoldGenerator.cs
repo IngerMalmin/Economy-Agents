@@ -14,6 +14,7 @@ public class GoldGenerator : MonoBehaviour
 
     public GameObject videoPlayer;
     public VideoPlayer playVideo;
+    public AudioSource sadSadMusic;
 
     
 
@@ -128,6 +129,7 @@ public class GoldGenerator : MonoBehaviour
     {
         if (currentGold  >= cost)
         {
+            currentGold -= cost;
             StartCoroutine(Video());
         }
         
@@ -138,7 +140,9 @@ public class GoldGenerator : MonoBehaviour
     {
         videoPlayer.SetActive(true);
         playVideo.Play();
-        yield return new WaitForSeconds(20f);
+        sadSadMusic.Pause();
+        yield return new WaitForSeconds(22f);
         videoPlayer.SetActive(false);
+        sadSadMusic.Play();
     }
 }
