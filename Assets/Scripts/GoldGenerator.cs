@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class GoldGenerator : MonoBehaviour
 {
@@ -12,8 +13,16 @@ public class GoldGenerator : MonoBehaviour
     public int goldFromPippin = 100;
 
     public GameObject videoPlayer;
+    public VideoPlayer playVideo;
+
+    
 
     [SerializeField] private TextMeshProUGUI score;
+
+    private void Start()
+    {
+        playVideo.Pause();
+    }
 
     public void CookieClicked()
     {
@@ -113,5 +122,23 @@ public class GoldGenerator : MonoBehaviour
             //Click the cookie
             PippinClick();
         }
+    }
+
+    public void FavoriteSonBonus(int cost)
+    {
+        if (currentGold  >= cost)
+        {
+            StartCoroutine(Video());
+        }
+        
+        
+    }
+
+    private IEnumerator Video()
+    {
+        videoPlayer.SetActive(true);
+        playVideo.Play();
+        yield return new WaitForSeconds(20f);
+        videoPlayer.SetActive(false);
     }
 }
