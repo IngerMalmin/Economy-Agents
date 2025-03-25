@@ -9,7 +9,7 @@ public class GoldGenerator : MonoBehaviour
 
     private int currentGold = 0;
     public int goldFromClick = 10;
-    public int goldFromSamwise = 300;
+    public int goldFromSamwise = 1000;
     public int goldFromPippin = 100;
 
     public GameObject videoPlayer;
